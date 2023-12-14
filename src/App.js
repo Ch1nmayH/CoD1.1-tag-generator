@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import './style.css';
-import example from './img/example.JPG'
-
+import example from './img/example.JPG';
 
 function App() {
+  const MAX_CHARACTERS = 32;
   const [inputText, setInputText] = useState('');
+
+  function handleInputChange(e) {
+    const newText = e.target.value;
+    if (newText.length <= MAX_CHARACTERS) {
+      setInputText(newText);
+    }
+  }
 
   function previewColors() {
     const colorMap = {
@@ -15,7 +22,7 @@ function App() {
       '5': 'cyan',
       '6': 'magenta',
       '7': 'white',
-      '0': 'black'
+      '0': 'black',
     };
 
     let output = '';
@@ -71,7 +78,7 @@ function App() {
           id="color-input"
           name="color-input"
           value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
+          onChange={handleInputChange}
         />
         <div
           id="color-preview"
